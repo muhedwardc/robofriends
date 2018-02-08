@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import CardList from './CardList';
 import SearchBox from './SearchBox';
-import { robots } from './robots';
 import './App.css';
 
 class App extends Component {
     state = {
-        robots: robots,
+        robots: [],
         searchField: ''
+    }
+
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => this.setState({robots: users}));
     }
 
     onSearchChange = (event) => {
@@ -19,13 +24,17 @@ class App extends Component {
             return robot.name.toLowerCase().includes(this.state.searchField.toLowerCase());
         });
 
-        return (
+        let content = (
             <div className='tc'>
                 <h1>RoboFriends</h1>
                 <SearchBox searchChange={this.onSearchChange}/>
                 <CardList robots={filteredRobots} />
             </div>
         )
+
+        this.state.robots === 0 ? content = <h1>Loading</h1> : null;
+
+        return content;
     }
 }
 
