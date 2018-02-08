@@ -1,4 +1,5 @@
 .search-bar {
     width: 400px;
     border-radius: 10px;
+    outline: none;
 }
