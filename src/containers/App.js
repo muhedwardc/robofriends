@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CardList from './CardList';
-import SearchBox from './SearchBox';
-import ScrollContent from './ScrollContent';
+import CardList from '../components/CardList';
+import SearchBox from '../components/SearchBox';
+import ScrollContent from '../components/ScrollContent';
 import './App.css';
 
 class App extends Component {
@@ -35,7 +35,7 @@ class App extends Component {
             </div>
         )
 
-        this.state.robots === 0 ? content = <h1>Loading</h1> : null;
+        if (this.state.robots === 0) content = <h1>Loading</h1>
 
         return content;
     }
